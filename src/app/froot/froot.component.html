@@ -1,0 +1,34 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="card p-3">
+                <div class="form-group">
+                    <label for="fruitItem">Fruits</label>
+                    <input type="text" #fruitItem class="form-control">
+                </div>
+                <button (click)="onfruitAdd()" mat-raised-button color="primary" class="btn-block">Add</button>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <ul class="form-group" *ngIf="fruits.length > 0; else nofruit">
+                <li *ngFor="let f of fruits; trackBy : trackById"
+                 class="list-group-item d-flex justify-content-between align-items-center">
+                    <strong>{{f.fname}}</strong>
+                    <div>
+                        <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon"
+                            class="mr-2">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button (click)="onRemove(f.id)" mat-mini-fab color="warn"
+                            aria-label="Example icon button with a menu icon">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </li>
+            </ul>
+            <ng-template #nofruit>
+               <p class="alert alert-primary">NO FRUITS !!!</p>
+            </ng-template>
+        </div>
+    </div>
+</div>

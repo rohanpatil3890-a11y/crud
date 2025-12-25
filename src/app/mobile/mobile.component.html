@@ -1,39 +1,33 @@
 <div class="container mt-5">
     <div class="row">
-        <div class="col-md-6 mb-4">
+        <div class="col-md-6 mb-3">
             <div class="card p-3">
                 <div class="form-group">
-                    <label for="todoItem">Todo Item</label>
-                    <input type="text" #todoItem class="form-control">
+                    <label for="mobileItem">Mobile Item</label>
+                    <input type="text" #mobileItem class="form-control">
                 </div>
-                <button (click)="onTodoAdd()" mat-raised-button color="primary" class="btn-block">Add Todo</button>
+                <button (click)="onmobileAdd()" mat-raised-button color="primary" class="btn-block">Add</button>
             </div>
-
         </div>
         <div class="col-md-6">
-            <ul class="list-group" *ngIf="todoArr.length > 0; else notodo">
-                <li *ngFor="let todo of todoArr; trackBy : trackById"
+            <ul class="list-group" *ngIf="mobiles.length > 0; else nomobile">
+                <li *ngFor="let m of mobiles; trackBy : trackById"
                     class="list-group-item d-flex justify-content-between align-items-center">
-                    <strong>{{todo.fname}}</strong>
+                    <strong>{{m.brand}}</strong>
                     <div>
                         <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon"
                             class="mr-2">
                             <mat-icon>edit</mat-icon>
                         </button>
-                        <button (click)="onRemove(todo.id)" mat-mini-fab color="warn"
+                        <button (click)="onRemove(m.id)" mat-mini-fab color="warn"
                             aria-label="Example icon button with a menu icon">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </div>
                 </li>
-
             </ul>
-            <ng-template #notodo>
-
-                <p class="alert alert-warning">
-                    NO TODOS !!!
-                </p>
-
+            <ng-template #nomobile>
+                 <p class="alert alert-primary">NO MOBILES !!!</p>
             </ng-template>
         </div>
     </div>

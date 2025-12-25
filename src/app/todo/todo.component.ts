@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Itodo } from '../models/todo';
+import { Icar, Itodo } from '../models/todo';
 
 @Component({
   selector: 'app-todo',
@@ -60,8 +60,8 @@ export class TodoComponent implements OnInit {
 
   }
 
-  trackById(index : number , todo : Itodo){
-       return todo.id
+  trackById(index: number, todo: Itodo) {
+    return todo.id
   }
 
   onRemove(id: string) {
@@ -70,5 +70,9 @@ export class TodoComponent implements OnInit {
 
     this.todoArr.splice(getIndex, 1)
   }
+
+
+
+
 
 }

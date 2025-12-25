@@ -1,39 +1,39 @@
+
+
+
+
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-md-6 mb-4">
+      <div class="row">
+        <div class="col-md-6">
             <div class="card p-3">
                 <div class="form-group">
-                    <label for="todoItem">Todo Item</label>
-                    <input type="text" #todoItem class="form-control">
+                    <label for="todoItem">Cars Item</label>
+                    <input type="text" #carItem class="form-control">
                 </div>
-                <button (click)="onTodoAdd()" mat-raised-button color="primary" class="btn-block">Add Todo</button>
+                <button (click)="oncarAdd()" mat-raised-button color="primary" class="btn-block">Add</button>
             </div>
-
         </div>
         <div class="col-md-6">
-            <ul class="list-group" *ngIf="todoArr.length > 0; else notodo">
-                <li *ngFor="let todo of todoArr; trackBy : trackById"
+            <ul class="list-group" *ngIf="carsArr.length > 0; else nocars">
+                <li *ngFor="let car of carsArr; trackBy : trackById"
                     class="list-group-item d-flex justify-content-between align-items-center">
-                    <strong>{{todo.fname}}</strong>
+                    <strong>{{car.carname}}</strong>
                     <div>
                         <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon"
                             class="mr-2">
                             <mat-icon>edit</mat-icon>
                         </button>
-                        <button (click)="onRemove(todo.id)" mat-mini-fab color="warn"
+                        <button
+                         (click)="onRemove(car.id)"
+                        mat-mini-fab color="warn"
                             aria-label="Example icon button with a menu icon">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </div>
                 </li>
-
             </ul>
-            <ng-template #notodo>
-
-                <p class="alert alert-warning">
-                    NO TODOS !!!
-                </p>
-
+            <ng-template #nocars>
+             <p class="alert alert-primary">NO CARS !!!</p>
             </ng-template>
         </div>
     </div>
