@@ -6,7 +6,10 @@
                     <label for="todoItem">Todo Item</label>
                     <input type="text" #todoItem class="form-control">
                 </div>
-                <button (click)="onTodoAdd()" mat-raised-button color="primary" class="btn-block">Add Todo</button>
+                <button *ngIf="!isinEditMode" (click)="onTodoAdd()" mat-raised-button color="primary"
+                    class="btn-block">Add Todo</button>
+                <button *ngIf="isinEditMode" (click)="onUpdate()" mat-raised-button color="primary"
+                    class="btn-block">Update Todo</button>
             </div>
 
         </div>
@@ -16,8 +19,8 @@
                     class="list-group-item d-flex justify-content-between align-items-center">
                     <strong>{{todo.fname}}</strong>
                     <div>
-                        <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon"
-                            class="mr-2">
+                        <button (click)="onEdit(todo)" mat-mini-fab color="primary"
+                            aria-label="Example icon button with a menu icon" class="mr-2">
                             <mat-icon>edit</mat-icon>
                         </button>
                         <button (click)="onRemove(todo.id)" mat-mini-fab color="warn"

@@ -10,7 +10,9 @@ import{FormsModule}from '@angular/forms';
 import { Todo1Component } from './todo1/todo1.component';
 import { BikeComponent } from './bike/bike.component';
 import { FrootComponent } from './froot/froot.component';
-import { MobileComponent } from './mobile/mobile.component'
+import { MobileComponent } from './mobile/mobile.component';
+import { LaptopComponent } from './laptop/laptop.component';
+import{MatSnackBarModule}from '@angular/material/snack-bar'
 
 @NgModule({
   declarations: [
@@ -19,14 +21,16 @@ import { MobileComponent } from './mobile/mobile.component'
     Todo1Component,
     BikeComponent,
     FrootComponent,
-    MobileComponent
+    MobileComponent,
+    LaptopComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

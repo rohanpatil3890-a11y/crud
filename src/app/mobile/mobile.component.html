@@ -6,7 +6,10 @@
                     <label for="mobileItem">Mobile Item</label>
                     <input type="text" #mobileItem class="form-control">
                 </div>
-                <button (click)="onmobileAdd()" mat-raised-button color="primary" class="btn-block">Add</button>
+                <button *ngIf="!inisEditMode" (click)="onmobileAdd()" mat-raised-button color="primary"
+                    class="btn-block">Add</button>
+                <button *ngIf="inisEditMode" (click)="onUpdateMobile()" mat-raised-button color="primary"
+                    class="btn-block">Update</button>
             </div>
         </div>
         <div class="col-md-6">
@@ -15,8 +18,8 @@
                     class="list-group-item d-flex justify-content-between align-items-center">
                     <strong>{{m.brand}}</strong>
                     <div>
-                        <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon"
-                            class="mr-2">
+                        <button (click)="onEdit(m)" mat-mini-fab color="primary"
+                            aria-label="Example icon button with a menu icon" class="mr-2">
                             <mat-icon>edit</mat-icon>
                         </button>
                         <button (click)="onRemove(m.id)" mat-mini-fab color="warn"
@@ -27,7 +30,7 @@
                 </li>
             </ul>
             <ng-template #nomobile>
-                 <p class="alert alert-primary">NO MOBILES !!!</p>
+                <p class="alert alert-primary">NO MOBILES !!!</p>
             </ng-template>
         </div>
     </div>

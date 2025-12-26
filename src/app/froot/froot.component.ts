@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Ifroot } from '../models/todo';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-froot',
@@ -8,7 +9,7 @@ import { Ifroot } from '../models/todo';
 })
 export class FrootComponent implements OnInit {
 
-  constructor() { }
+  constructor(private snackbar : MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +24,12 @@ export class FrootComponent implements OnInit {
       }
     )
   }
+
+   @ViewChild("fruitItem") fruitItem !: ElementRef;
+
+   inonEditMode : boolean = false;
+
+   EditId !: string
 
 
   fruits: Array<Ifroot> = [
@@ -40,9 +47,6 @@ export class FrootComponent implements OnInit {
     }
   ];
 
-
-  @ViewChild("fruitItem") fruitItem !: ElementRef;
-
   onfruitAdd() {
 
     if (this.fruitItem.nativeElement.value) {
@@ -50,7 +54,13 @@ export class FrootComponent implements OnInit {
         fname: this.fruitItem.nativeElement.value,
         id: this.uuid()
       }
+
       this.fruits.push(fruitObj);
+      this.snackbar.open(`THe fruit item with id ${fruitObj.id} is created successfully`, "Close",{
+        horizontalPosition : "left",
+        verticalPosition : "top",
+        duration : 2000
+      })
       this.fruitItem.nativeElement.value = "";
     }
 
@@ -64,7 +74,38 @@ export class FrootComponent implements OnInit {
    let getIndex = this.fruits.findIndex(f => f.id === id)
       
    this.fruits.splice(getIndex,1)
+
+  this.snackbar.open(`The fruit item with id ${id} is removed successfully`, "Close",{
+    horizontalPosition : "left",
+    verticalPosition : "top",
+    duration : 2000
+  })
    
+  }
+
+  onEdit(froot : Ifroot){
+
+    this.EditId = froot.id 
+    this.fruitItem.nativeElement.value = froot.fname;
+    this.inonEditMode = true;
+    
+  }
+
+  onUpdate(){
+
+    let UPDATE_FRUITOBJ : Ifroot ={
+      fname : this.fruitItem.nativeElement.value,
+      id : this.EditId
+    }
+    this.snackbar.open(`The fruit item with id ${UPDATE_FRUITOBJ.id} is updated successfully`,"Close",{
+      horizontalPosition : "left",
+      verticalPosition : "top",
+      duration : 2000
+    });
+    this.fruitItem.nativeElement.value = "";
+    let getIndex = this.fruits.findIndex(f => f.id === UPDATE_FRUITOBJ.id);
+    this.fruits[getIndex] = UPDATE_FRUITOBJ
+    this.inonEditMode = false;
   }
 
 }

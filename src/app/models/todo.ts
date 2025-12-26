@@ -24,3 +24,8 @@ export interface Imobile {
     brand: string;
     id: string;
 }
+
+export interface Ilaptop {
+    lname: string;
+    id: string;
+}

@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Ibike } from '../models/todo';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-bike',
@@ -8,7 +9,7 @@ import { Ibike } from '../models/todo';
 })
 export class BikeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private snackbar : MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -27,6 +28,11 @@ export class BikeComponent implements OnInit {
     )
   }
 
+    @ViewChild('bikeItem') bikeItem !: ElementRef;
+    EditId !: string;
+    isonEditMode : boolean = false;
+    
+
 
   bikesArr: Array<Ibike> = [
     {
@@ -43,7 +49,7 @@ export class BikeComponent implements OnInit {
     }
   ]
 
-  @ViewChild('bikeItem') bikeItem !: ElementRef;
+
 
   onAddBike() {
 
@@ -54,6 +60,11 @@ export class BikeComponent implements OnInit {
         id: this.uuid()
       }
       this.bikesArr.push(BikeObj);
+      this.snackbar.open(`The bike item with id ${BikeObj.id} is created succeesfully`,"Close",{
+        horizontalPosition : "left",
+        verticalPosition : "top",
+        duration : 2000
+      })
       this.bikeItem.nativeElement.value = ""
     }
   }
@@ -65,7 +76,36 @@ export class BikeComponent implements OnInit {
   onRemove(id : string){
     let getIndex = this.bikesArr.findIndex(b => b.id === id)
 
-    this.bikesArr.splice(getIndex,1)
+    this.bikesArr.splice(getIndex,1);
+    this.snackbar.open(`The bike item with id ${id} is removed successfully`,"Close",{
+      horizontalPosition : "left",
+      verticalPosition : "top",
+      duration : 2000
+    })
+  }
+
+  onEdit(bike : Ibike){
+    this.bikeItem.nativeElement.value = bike.bname;
+    this.EditId = bike.id
+    this.isonEditMode = true;
+  }
+
+  onUpdateBike(){
+
+    let UPDATE_BIKEOBJ : Ibike = {
+      bname : this.bikeItem.nativeElement.value,
+      id : this.EditId
+    }
+
+     let getIndex = this.bikesArr.findIndex(b => b.id === UPDATE_BIKEOBJ.id);
+     this.bikesArr[getIndex] = UPDATE_BIKEOBJ;
+     this.bikeItem.nativeElement.value = "";
+     this.isonEditMode = false;
+     this.snackbar.open(`The bike item with id ${UPDATE_BIKEOBJ.id} is updated successfully` ,"Close",{
+      horizontalPosition : "left",
+      verticalPosition : "top",
+      duration : 2000
+     })
   }
 
 }

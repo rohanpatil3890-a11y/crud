@@ -1,37 +1,36 @@
 <div class="container mt-5">
     <div class="row">
-        <div class="col-md-6 mb-3">
+        <div class="col-md-6">
             <div class="card p-3">
                 <div class="form-group">
-                    <label for="BikeItem">Bike Item</label>
-                    <input type="text" #bikeItem class="form-control">
+                    <label for="laptopItem">laptop Item</label>
+                    <input type="text" #laptopItem class="form-control">
                 </div>
-                <button *ngIf="!isonEditMode" (click)="onAddBike()" mat-raised-button color="primary"
+                <button *ngIf="!isonEditmode" (click)="onlaptopAdd()" mat-raised-button color="primary"
                     class="btn-block">Add</button>
-                <button *ngIf="isonEditMode" (click)="onUpdateBike()" mat-raised-button color="primary"
+                <button *ngIf="isonEditmode" (click)="onUpdateLaptop()" mat-raised-button color="primary"
                     class="btn-block">Update</button>
-
             </div>
         </div>
         <div class="col-md-6">
-            <ul class="list-group" *ngIf="bikesArr.length > 0; else nobike">
-                <li *ngFor="let bike of bikesArr; trackBy : trackById"
+            <ul class="list-group" *ngIf="laptopArr.length > 0; else nolaptop">
+                <li *ngFor="let l of laptopArr; trackBy : trackById"
                     class="list-group-item d-flex justify-content-between align-items-center">
-                    <strong>{{bike.bname}}</strong>
+                    <strong>{{l.lname}}</strong>
                     <div>
-                        <button (click)="onEdit(bike)" mat-mini-fab color="primary"
+                        <button (click)="onEditLaptop(l)" mat-mini-fab color="primary"
                             aria-label="Example icon button with a menu icon" class="mr-2">
                             <mat-icon>edit</mat-icon>
                         </button>
-                        <button (click)="onRemove(bike.id)" mat-mini-fab color="warn"
+                        <button (click)="onRemove(l.id)" mat-mini-fab color="warn"
                             aria-label="Example icon button with a menu icon">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </div>
                 </li>
             </ul>
-            <ng-template #nobike>
-                <p class="alert alert-primary">NO BIKE !!!</p>
+            <ng-template #nolaptop>
+                <p class="alert alert-primary">NO LAPTOP !!!</p>
             </ng-template>
         </div>
     </div>
